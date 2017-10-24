@@ -105,7 +105,21 @@ function fbLogin() {
 	// 로그인 여부 체크
 	FB.getLoginStatus(function(response) {
 		if (response.status === 'connected') {
-			FB.api('/me', function(res) {
+			FB.api('/me', { locale: 'en_US', fields: 'name, age_range, email' }, function(res) {
+				console.log("로그인 결과 - all : " + response);
+				console.log("로그인 결과 - response.status : " + response.status);
+				console.log("로그인 결과 - response.email : " + response.email);
+				console.log("로그인 결과 - response.name : " + response.name);
+				console.log("로그인 결과 - response.age_range : " + response.age_range);
+				console.log("로그인 결과 - response.birthday : " + response.birthday);
+				console.log("로그인 결과 - response.gender : " + response.gender);
+				console.log("로그인 결과 - response.authResponse : " + response.authResponse);
+				console.log("로그인 결과 - response.authResponse.accessToken : " + response.authResponse.accessToken);
+				console.log("로그인 결과 - response.authResponse.expiresIn : " + response.authResponse.expiresIn);
+				console.log("로그인 결과 - response.authResponse.signedRequest : " + response.authResponse.signedRequest);
+				console.log("로그인 결과 - response.authResponse.userID : " + response.authResponse.userID);
+			 });
+			/* FB.api('/me', function(res) {
 				console.log("로그인 결과 - all : " + response);
 				console.log("로그인 결과 - response.status : " + response.status);
 //				console.log("로그인 결과 - response.email : " + response.email);
@@ -115,7 +129,7 @@ function fbLogin() {
 				console.log("로그인 결과 - response.authResponse.expiresIn : " + response.authResponse.expiresIn);
 				console.log("로그인 결과 - response.authResponse.signedRequest : " + response.authResponse.signedRequest);
 				console.log("로그인 결과 - response.authResponse.userID : " + response.authResponse.userID);
-			});
+			}); */
 		} else if (response.status === 'not_authorized') {
 			alert('페이스북에 로그인을 하셨지요? 그렇다면 저희 앱을 인증해주셔야 이용이 가능합니다.');
 		} else {
