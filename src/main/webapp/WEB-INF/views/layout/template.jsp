@@ -105,7 +105,7 @@
 	<!--// js -->
 	
 	<button type="button" onclick="facebooklogin();">facebook 로그인</button>
-	<button type="button" onclick="FB.logout(function(response) {});">facebook 로그아웃</button>
+	<button type="button" onclick="facebookLogout()">facebook 로그아웃</button>
  
 <script>
 window.fbAsyncInit = function() {  
@@ -138,7 +138,14 @@ function facebooklogin() {
 // } , {scope: "user_about_me,email,user_birthday,public_profile"} );
  } , {scope: "email,public_profile"} );
  
-} 
+}
+
+function facebookLogout(){
+	FB.logout(function(response) {
+		// 사용자 로그 아웃 이후 콜백처리
+	});
+
+}
  
 function getMyProfile(){
  FB.api('/me',{fields: 'name,email,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'}, function(user){
