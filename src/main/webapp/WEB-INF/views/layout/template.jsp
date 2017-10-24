@@ -141,7 +141,7 @@ function facebooklogin() {
 } 
  
 function getMyProfile(){
- FB.api('/me',{fields: 'email,public_profile'}, function(user){
+ FB.api('/me',{fields: 'name,email,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'}, function(user){
  
  var myName= user.name ;
  var myEmail = user.email;
