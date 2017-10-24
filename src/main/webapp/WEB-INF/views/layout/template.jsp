@@ -191,7 +191,7 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
  
 //add event listener to login button
-document.getElementById('btnFacebookSignin').addEventListener('click', function() {
+jQuery("#btnFacebookSignin").('click', function() {
 	//do the login
 	FB.login(function(response) {
 		if (response.authResponse) {
