@@ -173,7 +173,7 @@ window.fbAsyncInit = function() {
 	FB.getLoginStatus(function(response) {
 		if (response.status === 'connected') {
 			//user is authorized
-			//document.getElementById('loginBtn').style.display = 'none';
+			//document.getElementById('btnFacebookSignin').style.display = 'none';
 			getUserData();
 		} else {
 			//user is not authorized
@@ -191,7 +191,7 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
  
 //add event listener to login button
-document.getElementById('loginBtn').addEventListener('click', function() {
+document.getElementById('btnFacebookSignin').addEventListener('click', function() {
 	//do the login
 	FB.login(function(response) {
 		if (response.authResponse) {
@@ -202,7 +202,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
             $("#access_token").text("접근 토큰 : "+access_token);
             $("#user_id").text("FB UID : "+user_id);
 			//user just authorized your app
-			//document.getElementById('loginBtn').style.display = 'none';
+			//document.getElementById('btnFacebookSignin').style.display = 'none';
 			getUserData();
 		}
 	}, {scope: 'email,public_profile,user_birthday', 
@@ -211,7 +211,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 </script>
 
 <!-- <div id="fb-root"></div> -->
-<div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div>
+<!-- <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div> -->
 <!-- <div class="fb-login-button" data-width="327.328" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="fbLogin();"></div> -->
 
 	<tiles:insertAttribute name ="header"/>
