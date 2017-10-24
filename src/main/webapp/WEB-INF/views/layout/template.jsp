@@ -207,7 +207,7 @@ jQuery("#btnFacebookSignin").('click', function() {
 		}
 	}, {scope: 'email,public_profile,user_birthday', 
 		return_scopes: true});
-}, false);
+});
 </script>
 
 <!-- <div id="fb-root"></div> -->
