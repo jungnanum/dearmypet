@@ -105,13 +105,17 @@
 	<!--// js -->
 	
 	<button type="button" onclick="facebooklogin();">facebook 로그인</button>
-	<button type="button" onclick="FB.logout();">facebook 로그아웃</button>
+	<button type="button" onclick="FB.logout(function(response) {});">facebook 로그아웃</button>
  
 <script>
 window.fbAsyncInit = function() {  
  FB.init({appId: '143878959678270', status: true, 
 		autoLogAppEvents : true,
 		version          : 'v2.10', cookie: true,xfbml: true});
+// 페이스북 logout시 새로고침
+ FB.Event.subscribe('auth.logout', function(response) {
+	    document.location.reload();
+	}); 
 };
  
 (function(d){  
@@ -147,6 +151,15 @@ function getMyProfile(){
  console.log("user.name", user.name);
  console.log("user.email", user.email);
  console.log("user.id", user.id);
+ console.log("user.cover", user.cover);
+ console.log("user.age_range", user.age_range);
+ console.log("user.link", user.link);
+ console.log("user.gender", user.gender);
+ console.log("user.locale", user.locale);
+ console.log("user.picture", user.picture);
+ console.log("user.timezone", user.timezone);
+ console.log("user.updated_time", user.updated_time);
+ console.log("user.verified", user.verified);
  
  if(myEmail != ""){
    //정보를 post로 보내고 submit처리
