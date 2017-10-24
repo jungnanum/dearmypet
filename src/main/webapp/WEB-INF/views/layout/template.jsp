@@ -78,91 +78,6 @@
 </head>
 <body>
 
-<script>
-window.fbAsyncInit = function() {
-	FB.init({
-		appId            : '136947376934480',
-		status : true,
-		cookie:true,
-		autoLogAppEvents : true,
-		xfbml            : true,
-		version          : 'v2.10'
-	});
-	FB.AppEvents.logPageView();
-};
-
-(function(d, s, id){
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) {return;}
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.10&appId=136947376934480";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-/* FB.getLoginStatus(function(response) {
-	statusChangeCallback(response);
-});
- */
-function fbLogin() {
-	FB.login(function(response) {
-		// handle the response
-		if (response.status === 'connected') {
-			// Logged into your app and Facebook.
-
-			FB.api('/me', { locale: 'ko_KR', fields: 'name, age_range, public_profile,email,birthday,gender' }, function(response) {
-				console.log("로그인 결과 - all : " + response);
-				console.log("로그인 결과 - response.status : " + response.status);
-				console.log("로그인 결과 - response.email : " + response.email);
-				console.log("로그인 결과 - response.name : " + response.name);
-				console.log("로그인 결과 - response.age_range : " + response.age_range);
-				console.log("로그인 결과 - response.birthday : " + response.birthday);
-				console.log("로그인 결과 - response.gender : " + response.gender);
-				console.log("로그인 결과 - response.authResponse : " + response.authResponse);
-				console.log("로그인 결과 - response.authResponse.accessToken : " + response.authResponse.accessToken);
-				console.log("로그인 결과 - response.authResponse.expiresIn : " + response.authResponse.expiresIn);
-				console.log("로그인 결과 - response.authResponse.signedRequest : " + response.authResponse.signedRequest);
-				console.log("로그인 결과 - response.authResponse.userID : " + response.authResponse.userID);
-			 });
-			
-		} else if (response.status === 'not_authorized') {
-			alert('페이스북에 로그인을 하셨지요? 그렇다면 저희 앱을 인증해주셔야 이용이 가능합니다.');
-		} else {
-			alert('페이스북에 로그인을 안하셨습니다.');
-		}
-	}, {scope: 'public_profile,email'});
-	 /*
-	// 로그인 여부 체크
-	FB.getLoginStatus(function(response) {
-		if (response.status === 'connected') {
-			FB.api('/me', { locale: 'ko_KR', fields: 'name, age_range, public_profile,email,birthday,gender' }, function(res) {
-				console.log("로그인 결과 - all : " + response);
-				console.log("로그인 결과 - response.status : " + response.status);
-				console.log("로그인 결과 - response.email : " + response.email);
-				console.log("로그인 결과 - response.name : " + response.name);
-				console.log("로그인 결과 - response.age_range : " + response.age_range);
-				console.log("로그인 결과 - response.birthday : " + response.birthday);
-				console.log("로그인 결과 - response.gender : " + response.gender);
-				console.log("로그인 결과 - response.authResponse : " + response.authResponse);
-				console.log("로그인 결과 - response.authResponse.accessToken : " + response.authResponse.accessToken);
-				console.log("로그인 결과 - response.authResponse.expiresIn : " + response.authResponse.expiresIn);
-				console.log("로그인 결과 - response.authResponse.signedRequest : " + response.authResponse.signedRequest);
-				console.log("로그인 결과 - response.authResponse.userID : " + response.authResponse.userID);
-			 });
-			
-		} else if (response.status === 'not_authorized') {
-			alert('페이스북에 로그인을 하셨지요? 그렇다면 저희 앱을 인증해주셔야 이용이 가능합니다.');
-		} else {
-			alert('페이스북에 로그인을 안하셨습니다.');
-		}
-	}, true);
-	*/
-}
-
-jQuery("btnFacebookSignin").click(function(){
-	location.href="https://www.facebook.com/v2.8/dialog/oauth?client_id=136947376934480&redirect_uri=https://dearpet.herokuapp.com/facebookAccessToken.dmp&scope=public_profile,email";
-});
-
-</script>
 <!-- <div id="fb-root"></div> -->
 <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div>
 <!-- <div class="fb-login-button" data-width="327.328" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="fbLogin();"></div> -->
@@ -189,6 +104,56 @@ jQuery("btnFacebookSignin").click(function(){
 	%>
 	<!--// js -->
 	
-	
+	<button type="button" onclick="facebooklogin();"></button>
+ 
+<script>
+window.fbAsyncInit = function() {  
+ FB.init({appId: '136947376934480', status: true, cookie: true,xfbml: true});
+};
+ 
+(function(d){  
+ var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];  
+ if (d.getElementById(id)) {return;}  
+ js = d.createElement('script'); js.id = id; js.async = true;  
+ js.src = "//connect.facebook.net/en_US/all.js";  
+ ref.parentNode.insertBefore(js, ref);  
+}(document)); 
+ 
+function facebooklogin() {  
+ FB.login(function(response) {
+   if (response.status === 'connected') {
+  getMyProfile();
+   } else if (response.status === 'not_authorized') {
+		alert('페이스북에 로그인을 하셨지요? 그렇다면 저희 앱을 인증해주셔야 이용이 가능합니다.');
+   } else {
+		alert('페이스북에 로그인을 안하셨습니다.');
+   }
+ } , {scope: "user_about_me,email,user_birthday,public_profile"} );
+ 
+} 
+ 
+function getMyProfile(){
+ FB.api('/me',function(user){
+ 
+ var myName= user.name ;
+ var myEmail = user.email;
+ var myId = user.id;
+ 
+ console.dir(user);
+ console.log(user.name);
+ console.log(user.email);
+ console.log(user.id);
+ 
+ if(myEmail != ""){
+   //정보를 post로 보내고 submit처리
+ }
+ 
+  });
+ FB.api('/me/picture?type=large',function(data){
+ var myImg = data.data.url;
+ });
+}
+</script>
+
 </body>
 </html>
