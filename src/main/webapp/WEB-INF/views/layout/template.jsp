@@ -104,11 +104,13 @@
 	%>
 	<!--// js -->
 	
-	<button type="button" onclick="facebooklogin();">facebook</button>
+	<button type="button" onclick="facebooklogin();">facebook 로그인</button>
+	<button type="button" onclick="FB.logout();">facebook 로그아웃</button>
  
 <script>
 window.fbAsyncInit = function() {  
  FB.init({appId: '143878959678270', status: true, 
+		autoLogAppEvents : true,
 		version          : 'v2.10', cookie: true,xfbml: true});
 };
  
