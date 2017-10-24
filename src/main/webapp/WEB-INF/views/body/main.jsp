@@ -11,4 +11,5 @@
 			<h2>바디부분</h2>
 		</div>
 		<div class="text-center">내요요요요옹</div>
+		<div><%=session.getAttribute("test") %></div>
 	</div>
