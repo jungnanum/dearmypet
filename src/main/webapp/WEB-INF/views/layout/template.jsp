@@ -105,7 +105,7 @@ function fbLogin() {
 	// 로그인 여부 체크
 	FB.getLoginStatus(function(response) {
 		if (response.status === 'connected') {
-			FB.api('/me', { locale: 'en_US', fields: 'name, age_range, email' }, function(res) {
+			FB.api('/me', { locale: 'en_US', fields: 'name, age_range, email,birthday,gender' }, function(res) {
 				console.log("로그인 결과 - all : " + response);
 				console.log("로그인 결과 - response.status : " + response.status);
 				console.log("로그인 결과 - response.email : " + response.email);
@@ -141,7 +141,7 @@ function fbLogin() {
 </script>
 <!-- <div id="fb-root"></div> -->
 <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div>
-<div class="fb-login-button" data-width="327.328" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="fbLogin();"></div>
+<!-- <div class="fb-login-button" data-width="327.328" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="fbLogin();"></div> -->
 
 	<tiles:insertAttribute name ="header"/>
 
