@@ -104,18 +104,19 @@
 	%>
 	<!--// js -->
 	
-	<button type="button" onclick="facebooklogin();"></button>
+	<button type="button" onclick="facebooklogin();">facebook</button>
  
 <script>
 window.fbAsyncInit = function() {  
- FB.init({appId: '136947376934480', status: true, cookie: true,xfbml: true});
+ FB.init({appId: '136947376934480', status: true, 
+		version          : 'v2.10', cookie: true,xfbml: true});
 };
  
 (function(d){  
  var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];  
  if (d.getElementById(id)) {return;}  
  js = d.createElement('script'); js.id = id; js.async = true;  
- js.src = "//connect.facebook.net/en_US/all.js";  
+ js.src = "//connect.facebook.net/ko_KR/sdk.js";  
  ref.parentNode.insertBefore(js, ref);  
 }(document)); 
  
