@@ -142,6 +142,7 @@ function facebooklogin() {
 
 function facebookLogout(){
 	FB.logout(function(response) {
+		FB.Auth.setAuthResponse(null, 'unknown');
 		// 사용자 로그 아웃 이후 콜백처리
 	});
 
