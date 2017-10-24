@@ -141,10 +141,32 @@ function facebooklogin() {
 }
 
 function facebookLogout(){
-	FB.logout(function(response) {
-		FB.Auth.setAuthResponse(null, 'unknown');
-		// 사용자 로그 아웃 이후 콜백처리
-	});
+	//check if logout is 
+    FB.getLoginStatus(function (response) {
+        console.log('inside login status');
+        if (response.status === 'connected') {
+            // the user is logged in and has authenticated your
+            // app, and response.authResponse supplies
+            // the user's ID, a valid access token, a signed
+            // request, and the time the access token 
+            // and signed request each expire
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+            FB.logout(function (response) {
+
+                FB.Auth.setAuthResponse(null, 'unknown');
+
+            });
+        } else if (response.status === 'not_authorized') {
+            // the user is logged in to Facebook, 
+            // but has not authenticated your app
+
+        } else {
+            // the user isn't logged in to Facebook.
+            console.log('response status not logged in');
+        }
+    });
+    window.location.href = '/main.dmp';
 
 }
  
