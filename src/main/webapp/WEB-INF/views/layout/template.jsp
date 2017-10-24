@@ -186,7 +186,8 @@ window.fbAsyncInit = function() {
 	var js, fjs = d.getElementsByTagName(s)[0];
 	if (d.getElementById(id)) {return;}
 	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.com/ko_KR/sdk.js";
+//	js.src = "//connect.facebook.com/ko_KR/sdk.js";
+	js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.8&appId=136947376934480";
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
  
