@@ -129,7 +129,8 @@ function facebooklogin() {
    } else {
 		alert('페이스북에 로그인을 안하셨습니다.');
    }
- } , {scope: "user_about_me,email,user_birthday,public_profile"} );
+// } , {scope: "user_about_me,email,user_birthday,public_profile"} );
+ } , {scope: "email,public_profile"} );
  
 } 
  
@@ -141,9 +142,9 @@ function getMyProfile(){
  var myId = user.id;
  
  console.dir(user);
- console.log(user.name);
- console.log(user.email);
- console.log(user.id);
+ console.log("user.name", user.name);
+ console.log("user.email", user.email);
+ console.log("user.id", user.id);
  
  if(myEmail != ""){
    //정보를 post로 보내고 submit처리
