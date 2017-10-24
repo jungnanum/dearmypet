@@ -79,7 +79,6 @@
 <body>
 
 <script>
-/*
 window.fbAsyncInit = function() {
 	FB.init({
 		appId            : '136947376934480',
@@ -97,12 +96,11 @@ window.fbAsyncInit = function() {
 	js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.10&appId=136947376934480";
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-*/
+
 /* FB.getLoginStatus(function(response) {
 	statusChangeCallback(response);
 });
  */
- /*
 function fbLogin() {
 	// 로그인 여부 체크
 	FB.getLoginStatus(function(response) {
@@ -120,7 +118,7 @@ function fbLogin() {
 				console.log("로그인 결과 - response.authResponse.expiresIn : " + response.authResponse.expiresIn);
 				console.log("로그인 결과 - response.authResponse.signedRequest : " + response.authResponse.signedRequest);
 				console.log("로그인 결과 - response.authResponse.userID : " + response.authResponse.userID);
-			 });*/
+			 });
 			/* FB.api('/me', function(res) {
 				console.log("로그인 결과 - all : " + response);
 				console.log("로그인 결과 - response.status : " + response.status);
@@ -132,7 +130,6 @@ function fbLogin() {
 				console.log("로그인 결과 - response.authResponse.signedRequest : " + response.authResponse.signedRequest);
 				console.log("로그인 결과 - response.authResponse.userID : " + response.authResponse.userID);
 			}); */
-			/*
 		} else if (response.status === 'not_authorized') {
 			alert('페이스북에 로그인을 하셨지요? 그렇다면 저희 앱을 인증해주셔야 이용이 가능합니다.');
 		} else {
@@ -140,79 +137,14 @@ function fbLogin() {
 		}
 	}, true);
 }
-*/
-</script>
 
-<script>
-function getUserData() {
-	/* FB.api('/me', function(response) {
-		document.getElementById('response').innerHTML = 'Hello ' + response.name;
-		console.log(response);
-	}); */
-	FB.api('/me', {fields: 'name,email,gender,birthday'}, function(response) {
-	    console.log(JSON.stringify(response));
-	    $("#name").text("이름 : "+response.name);
-        $("#email").text("이메일 : "+response.email);
-        $("#gender").text("성별 : "+response.gender);
-        $("#birthday").text("생년월일 : "+response.birthday);
-        $("#id").text("아이디 : "+response.id);
-	});
-}
- 
-window.fbAsyncInit = function() {
-	//SDK loaded, initialize it
-	FB.init({
-		appId      : '136947376934480',
-		cookie     : true,  // enable cookies to allow the server to access 
-		        // the session
-		xfbml      : true,  // parse social plugins on this page
-		version    : 'v2.8' // use graph api version 2.8
-	});
- 
-	//check user session and refresh it
-	FB.getLoginStatus(function(response) {
-		if (response.status === 'connected') {
-			//user is authorized
-			//document.getElementById('btnFacebookSignin').style.display = 'none';
-			getUserData();
-		} else {
-			//user is not authorized
-		}
-	});
-};
- 
-//load the JavaScript SDK
-(function(d, s, id){
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) {return;}
-	js = d.createElement(s); js.id = id;
-//	js.src = "//connect.facebook.com/ko_KR/sdk.js";
-	js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.8&appId=136947376934480";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
- 
-//add event listener to login button
-jQuery("#btnFacebookSignin").on('click', function() {
-	//do the login
-	FB.login(function(response) {
-		if (response.authResponse) {
-			access_token = response.authResponse.accessToken; //get access token
-            user_id = response.authResponse.userID; //get FB UID
-            console.log('access_token = '+access_token);
-            console.log('user_id = '+user_id);
-            $("#access_token").text("접근 토큰 : "+access_token);
-            $("#user_id").text("FB UID : "+user_id);
-			//user just authorized your app
-			//document.getElementById('btnFacebookSignin').style.display = 'none';
-			getUserData();
-		}
-	}, {scope: 'email,public_profile,user_birthday', 
-		return_scopes: true});
+jQuery("btnFacebookSignin").click(function(){
+	location.href="https://www.facebook.com/v2.8/dialog/oauth?client_id=136947376934480&redirect_uri=https://dearpet.herokuapp.com/facebookAccessToken.dmp&scope=public_profile,email";
 });
-</script>
 
+</script>
 <!-- <div id="fb-root"></div> -->
-<!-- <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div> -->
+<div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div>
 <!-- <div class="fb-login-button" data-width="327.328" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="fbLogin();"></div> -->
 
 	<tiles:insertAttribute name ="header"/>
