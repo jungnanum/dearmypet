@@ -135,7 +135,7 @@ function facebooklogin() {
 } 
  
 function getMyProfile(){
- FB.api('/me',function(user){
+ FB.api('/me',{fields: 'name,email'}, function(user){
  
  var myName= user.name ;
  var myEmail = user.email;
