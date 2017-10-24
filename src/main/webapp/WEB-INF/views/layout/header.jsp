@@ -283,6 +283,15 @@
 	</div>
 </div>
 <!-- 로그인 모달종료 -->
+
+<div id="access_token"></div>
+			<div id="user_id"></div>
+			<div id="name"></div>
+			<div id="email"></div>
+			<div id="gender"></div>
+			<div id="birthday"></div>
+			<div id="id"></div>
+			
 	
 	
 	
