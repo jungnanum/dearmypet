@@ -175,7 +175,6 @@ function getUserProfile(){
 	// arg2 : 페이스북으로부터 가져올 사용자 정보 필드들
 		{fields: 'name,email,birthday,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'},
 		function(user){
-			userInfo.user = user;
 			var userName= user.name ;
 			var userEmail = user.email;
 			var userId = user.id;
