@@ -17,8 +17,7 @@ import net.dearmypet.webapp.vo.*;
 
 @Controller
 public class FacebookSigninController {
-	
-	@RequestMapping(value="/facebookAccessToken", method=RequestMethod.POST)
+	@RequestMapping(value="/facebookSignin.jsn", method=RequestMethod.POST)
 	public @ResponseBody Map<String , Object> facebookSignin(@ModelAttribute FacebookSigninVO facebookSigninVO) {
 		Map<String, Object> jsonObject = new HashMap<String, Object>();
 		Map<String, Object> jsonSubObject = null;
