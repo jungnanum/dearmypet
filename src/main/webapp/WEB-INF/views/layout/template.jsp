@@ -215,7 +215,7 @@ function getUserProfile(){
 					error: function(res){
 						console.log(res);
 					},
-					dataType: json
+					dataType: 'json'
 				});
 				
 			}
