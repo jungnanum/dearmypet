@@ -207,19 +207,19 @@ function getUserProfile(){
 					type: "POST",
 					url: "/facebookSignin.dmp",
 					data: {
-						name : user.name,
-						email : user.email,
-						birthday : user.birthday,
-						id : user.id,
-						cover : user.cover,
-						age_range : user.age_range,
-						link : user.link,
-						gender : user.gender,
-						locale : user.locale,
-						picture : user.picture,
-						timezone : user.timezone,
-						updated_time : user.updated_time,
-						verified : user.verified,
+						lgfb_id : user.id,
+						lgfb_picture : user.picture,
+						lgfb_name : user.name,
+						lgfb_age_range : user.age_range,
+						lgfb_gender : user.gender,
+						lgfb_email : user.email,
+						lgfb_birthday : user.birthday,
+						lgfb_verified : user.verified
+//						cover : user.cover,
+//						link : user.link,
+//						locale : user.locale,
+//						timezone : user.timezone,
+//						updated_time : user.updated_time
 					},
 					success: function(res){
 						console.log(res);
