@@ -108,97 +108,113 @@
 	<button type="button" onclick="facebookLogout()">facebook 로그아웃</button>
  
 <script>
-window.fbAsyncInit = function() {  
- FB.init({appId: '143878959678270', status: true, 
+window.fbAsyncInit = function(){
+	FB.init({
+		appId: '143878959678270', status: true,
 		autoLogAppEvents : true,
-		version          : 'v2.10', cookie: true,xfbml: true});
-// 페이스북 logout시 새로고침
- FB.Event.subscribe('auth.logout', function(response) {
-	    document.location.reload();
-	}); 
+		version : 'v2.10',
+		cookie: true,
+		xfbml: true
+	});
+	// 페이스북 logout시 새로고침
+	FB.Event.subscribe('auth.logout', function(response){
+		document.location.reload();
+	});
 };
- 
-(function(d){  
- var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];  
- if (d.getElementById(id)) {return;}  
- js = d.createElement('script'); js.id = id; js.async = true;  
- js.src = "//connect.facebook.net/ko_KR/sdk.js";  
- ref.parentNode.insertBefore(js, ref);  
-}(document)); 
- 
-function facebooklogin() {  
- FB.login(function(response) {
-   if (response.status === 'connected') {
-  getMyProfile();
-   } else if (response.status === 'not_authorized') {
-		alert('페이스북에 로그인을 하셨지요? 그렇다면 저희 앱을 인증해주셔야 이용이 가능합니다.');
-   } else {
-		alert('페이스북에 로그인을 안하셨습니다.');
-   }
-// } , {scope: "user_about_me,email,user_birthday,public_profile"} );
- } , {scope: "email,public_profile"} );
- 
+
+(function(d){
+var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement('script'); js.id = id; js.async = true;
+js.src = "//connect.facebook.net/ko_KR/sdk.js";
+ref.parentNode.insertBefore(js, ref);
+}(document));
+
+function facebooklogin(){
+	FB.login(function(response){
+		if (response.status === 'connected'){
+			getUserProfile();
+		} else if (response.status === 'not_authorized'){
+			alert('페이스북에 로그인을 하셨지요? 그렇다면 저희 앱을 인증해주셔야 이용이 가능합니다.');
+		} else {
+			alert('페이스북에 로그인을 안하셨습니다.');
+		}
+//	} , {scope: "user_about_me,email,user_birthday,public_profile"} );
+	}, {scope: "email,public_profile"} );
+
 }
 
 function facebookLogout(){
 	//check if logout is 
-    FB.getLoginStatus(function (response) {
-        console.log('inside login status');
-        if (response.status === 'connected') {
-            // the user is logged in and has authenticated your
-            // app, and response.authResponse supplies
-            // the user's ID, a valid access token, a signed
-            // request, and the time the access token 
-            // and signed request each expire
-            var uid = response.authResponse.userID;
-            var accessToken = response.authResponse.accessToken;
-            FB.logout(function (response) {
+	FB.getLoginStatus(function (response) {
+		//console.log('inside login status');
+		if (response.status === 'connected'){
+			var uid = response.authResponse.userID;
+			var accessToken = response.authResponse.accessToken;
+			// 로그아웃 시도
+			FB.logout(function (response) {
+				FB.Auth.setAuthResponse(null, 'unknown');
+			});
+		} else if (response.status === 'not_authorized'){
+			// the user is logged in to Facebook, 
+			// but has not authenticated your app
 
-                FB.Auth.setAuthResponse(null, 'unknown');
-
-            });
-        } else if (response.status === 'not_authorized') {
-            // the user is logged in to Facebook, 
-            // but has not authenticated your app
-
-        } else {
-            // the user isn't logged in to Facebook.
-            console.log('response status not logged in');
-        }
-    });
-    window.location.href = '/main.dmp';
-
+		} else {
+			// the user isn't logged in to Facebook.
+			//console.log('response status not logged in');
+		}
+	});
+	window.location.href = '/main.dmp';
 }
- 
-function getMyProfile(){
- FB.api('/me',{fields: 'name,email,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'}, function(user){
- 
- var myName= user.name ;
- var myEmail = user.email;
- var myId = user.id;
- 
- console.dir(user);
- console.log("user.name", user.name);
- console.log("user.email", user.email);
- console.log("user.id", user.id);
- console.log("user.cover", user.cover);
- console.log("user.age_range", user.age_range);
- console.log("user.link", user.link);
- console.log("user.gender", user.gender);
- console.log("user.locale", user.locale);
- console.log("user.picture", user.picture);
- console.log("user.timezone", user.timezone);
- console.log("user.updated_time", user.updated_time);
- console.log("user.verified", user.verified);
- 
- if(myEmail != ""){
-   //정보를 post로 보내고 submit처리
- }
- 
-  });
- FB.api('/me/picture?type=large',function(data){
- var myImg = data.data.url;
- });
+
+// 페이스북으로부터 사용자 정보 가져오기
+function getUserProfile(){
+	FB.api('/me',
+	// arg2 : 페이스북으로부터 가져올 사용자 정보 필드들
+		{fields: 'name,email,lgfb_birthday,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'},
+		function(user){
+			var userName= user.name ;
+			var userEmail = user.email;
+			var userId = user.id;
+
+			console.dir(user);
+			console.log("user.name", user.name);
+			console.log("user.email", user.email);
+			console.log("user.lgfb_birthday", user.lgfb_birthday);
+			console.log("user.id", user.id);
+			console.log("user.cover", user.cover);
+			console.log("user.age_range", user.age_range);
+			console.log("user.link", user.link);
+			console.log("user.gender", user.gender);
+			console.log("user.locale", user.locale);
+			console.log("user.picture", user.picture);
+			console.log("user.timezone", user.timezone);
+			console.log("user.updated_time", user.updated_time);
+			console.log("user.verified", user.verified);
+
+			if(userEmail == ""){
+				alert("이메일 정보를 페이스북으로부터 받지 못했습니다.\n페이스북의 앱설정에서 이메일 권한을 허용해주세요.");
+				FB.logout();
+			} else if(user.id == ""){
+				alert("페이스북으로부터 사용자id값을 가져오지 못했습니다.\n다시 확인하시고 페이스북을 통한 로그인을 시도해주시기 바랍니다.");
+				FB.logout();
+			} else {
+				// 로그인, 가입
+				$.ajax({
+					  type: "POST",
+					  url: "/",
+					  data: data,
+					  success: success,
+					  dataType: dataType
+					});
+			}
+
+		}
+	);
+	FB.api('/me/picture?type=large',function(data){
+		var userImg = data.data.url;
+		console.log(userImg);
+	});
 }
 </script>
 
