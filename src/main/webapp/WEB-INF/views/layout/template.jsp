@@ -196,9 +196,9 @@ function getUserProfile(){
 					url: "/facebookSignin.jsn",
 					data: {
 						lgfb_id : user.id,
-						lgfb_picture : user.picture,
+						lgfb_picture : user.picture.data.url,
 						lgfb_name : user.name,
-						lgfb_age_range : user.age_range,
+						lgfb_age_range : JSON.stringify(user.age_range),
 						lgfb_gender : user.gender,
 						lgfb_email : user.email,
 						lgfb_birthday : user.birthday,
