@@ -193,7 +193,7 @@ function getUserProfile(){
 				// 로그인, 가입				
 				$.ajax({
 					type: "POST",
-					url: "/facebookSignin.dmp",
+					url: "/facebookSignin.jsn",
 					data: {
 						lgfb_id : user.id,
 						lgfb_picture : user.picture,
