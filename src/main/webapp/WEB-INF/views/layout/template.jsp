@@ -171,7 +171,7 @@ function facebookLogout(){
 function getUserProfile(){
 	FB.api('/me',
 	// arg2 : 페이스북으로부터 가져올 사용자 정보 필드들
-		{fields: 'name,email,lgfb_birthday,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'},
+		{fields: 'name,email,birthday,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'},
 		function(user){
 			var userName= user.name ;
 			var userEmail = user.email;
@@ -180,7 +180,7 @@ function getUserProfile(){
 			console.dir(user);
 			console.log("user.name", user.name);
 			console.log("user.email", user.email);
-			console.log("user.lgfb_birthday", user.lgfb_birthday);
+			console.log("user.birthday", user.birthday);
 			console.log("user.id", user.id);
 			console.log("user.cover", user.cover);
 			console.log("user.age_range", user.age_range);
