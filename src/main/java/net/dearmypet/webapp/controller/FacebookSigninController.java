@@ -35,6 +35,25 @@ public class FacebookSigninController {
 		jsonSubObject.put("lgfb_verified", facebookSigninVO.getLgfb_verified());
 		jsonList.add(jsonSubObject);
 		
+		
+
+		//1번째 데이터
+		jsonSubObject = new HashMap<String, Object>();
+		jsonSubObject.put("idx", 1);
+		jsonSubObject.put("title", "제목입니다");
+		jsonSubObject.put("create_date", new Date());
+		jsonList.add(jsonSubObject);
+		//2번째 데이터
+		jsonSubObject = new HashMap<String, Object>();
+		jsonSubObject.put("idx", 2);
+		jsonSubObject.put("title", "두번째제목입니다");
+		jsonSubObject.put("create_date", new Date());
+		jsonList.add(jsonSubObject);
+		
+		jsonObject.put("success", true);
+		jsonObject.put("total_count", 10);
+		jsonObject.put("result_list", jsonList);
+		
 		return jsonObject;
 	}
 }
