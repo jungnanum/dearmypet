@@ -146,25 +146,14 @@ function facebooklogin(){
 
 function facebookLogout(){
 	//check if logout is 
-	FB.getLoginStatus(function (response) {
-		//console.log('inside login status');
-		if (response.status === 'connected'){
-			var uid = response.authResponse.userID;
-			var accessToken = response.authResponse.accessToken;
-			// 로그아웃 시도
-			FB.logout(function (response) {
-				FB.Auth.setAuthResponse(null, 'unknown');
+	FB.getLoginStatus(function(response) {
+		if (response && response.status === 'connected') {
+			FB.logout(function(response) {
+				document.location.reload();
 			});
-		} else if (response.status === 'not_authorized'){
-			// the user is logged in to Facebook, 
-			// but has not authenticated your app
-
-		} else {
-			// the user isn't logged in to Facebook.
-			//console.log('response status not logged in');
 		}
 	});
-	window.location.href = '/main.dmp';
+//	window.location.href = '/main.dmp';
 }
 
 
@@ -196,10 +185,10 @@ function getUserProfile(){
 
 			if(userEmail == ""){
 				alert("이메일 정보를 페이스북으로부터 받지 못했습니다.\n페이스북의 앱설정에서 이메일 권한을 허용해주세요.");
-				FB.logout();
+				facebookLogout();
 			} else if(user.id == ""){
 				alert("페이스북으로부터 사용자id값을 가져오지 못했습니다.\n다시 확인하시고 페이스북을 통한 로그인을 시도해주시기 바랍니다.");
-				FB.logout();
+				facebookLogout();
 			} else {
 				// 로그인, 가입				
 				$.ajax({
