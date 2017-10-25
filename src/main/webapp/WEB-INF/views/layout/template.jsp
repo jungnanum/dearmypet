@@ -167,12 +167,15 @@ function facebookLogout(){
 	window.location.href = '/main.dmp';
 }
 
+
+var userInfo = {};
 // 페이스북으로부터 사용자 정보 가져오기
 function getUserProfile(){
 	FB.api('/me',
 	// arg2 : 페이스북으로부터 가져올 사용자 정보 필드들
 		{fields: 'name,email,birthday,id,cover,age_range,link,gender,locale,picture,timezone,updated_time,verified'},
 		function(user){
+			userInfo = user;
 			var userName= user.name ;
 			var userEmail = user.email;
 			var userId = user.id;
@@ -195,18 +198,21 @@ function getUserProfile(){
 			if(userEmail == ""){
 				alert("이메일 정보를 페이스북으로부터 받지 못했습니다.\n페이스북의 앱설정에서 이메일 권한을 허용해주세요.");
 				FB.logout();
+				userInfo = {};
 			} else if(user.id == ""){
 				alert("페이스북으로부터 사용자id값을 가져오지 못했습니다.\n다시 확인하시고 페이스북을 통한 로그인을 시도해주시기 바랍니다.");
 				FB.logout();
+				userInfo = {};
 			} else {
 				// 로그인, 가입
-				$.ajax({
+				/* $.ajax({
 					  type: "POST",
-					  url: "/",
-					  data: data,
+					  url: "/facebookSignin.dmp",
+					  data: user,
 					  success: success,
 					  dataType: dataType
 					});
+				 */
 			}
 
 		}
@@ -215,6 +221,8 @@ function getUserProfile(){
 		var userImg = data.data.url;
 		console.log(userImg);
 	});
+	
+	console.log("userInfo : ", userInfo);
 }
 </script>
 
