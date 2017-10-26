@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.dearmypet.webapp.dao.FacebookSigninDao;
 import net.dearmypet.webapp.service.FacebookSigninService;
+import net.dearmypet.webapp.service.LoginService;
 import net.dearmypet.webapp.vo.*;
 
 @Controller
 public class FacebookSigninController {
 	@Autowired
 	FacebookSigninService facebookSigninService;
+	
+	@Autowired
+	LoginService loginService;
 	
 	@RequestMapping(value="/facebookSignin.jsn", method=RequestMethod.POST)
 	public @ResponseBody Map<String , Object> facebookSignin(@ModelAttribute FacebookSigninVO facebookSigninVO, HttpSession httpSession) {
@@ -43,18 +47,26 @@ public class FacebookSigninController {
 			String strResult = facebookSigninService.signinFBUser(facebookSigninVO);
 			
 			if(strResult == "Success" || strResult == "insertSuccess") { // 기존회원 or 신규회원 insert 성공
-				// TODO: login테이블에 insert
+				strRet = "true";
+				
+				// facebook에 신규회원이 insert된 다음, login테이블에 insert
 				if(strResult == "insertSuccess") {
-					
-					
+					// insert한 facebook 사용자 정보를 바탕으로 no값 조회
+					int lgfb_no = facebookSigninService.getLgFbNo(facebookSigninVO.getLgfb_id());
+					// 기존facebookSigninVO + 부족한 no값 보태기
+					facebookSigninVO.setLgfb_no(lgfb_no);
+					int nAddMemberRet = loginService.insertLoginMemberFromFBUser(facebookSigninVO);
+					if(nAddMemberRet != 1) {
+						strRet = "false";
+					}
 				}
 				
 				// 세션처리
 				httpSession.setAttribute("isLogined", true);
 				httpSession.setAttribute("lg_login_type", "lgfb");
+				httpSession.setAttribute("lgfb_name", facebookSigninVO.getLgfb_name()); // 사용자명
 				
 
-				strRet = "true";
 			} else {
 				strRet = "false";
 			}

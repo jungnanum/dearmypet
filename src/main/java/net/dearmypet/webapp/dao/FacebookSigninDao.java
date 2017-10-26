@@ -16,4 +16,11 @@ public interface FacebookSigninDao {
 	 * @return int - insert 성공여부
 	 */
 	public int insertNewFacebookUser(FacebookSigninVO facebookSigninVO);
+	
+	/**
+	 * facebook 사용자ID를 기준으로 FacebookSigninVO를 가져온다.
+	 * @param lgFbId:String - facebook 사용자ID
+	 * @return FacebookSigninVO
+	 */
+	public FacebookSigninVO selectLgFbVoById(String lgFbId);
 }

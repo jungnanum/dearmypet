@@ -17,4 +17,12 @@ public interface FacebookSigninService {
 	public String signinFBUser(FacebookSigninVO facebookSigninVO);
 	
 	
+	/**
+	 * facebook 사용자ID를 기준으로 테이블no값을 가져온다.
+	 * @param lgFbId:String - facebook 사용자ID
+	 * @return lgfb_no:int - 테이블no값
+	 */
+	public int getLgFbNo(String lgFbId);
+	
+	
 }

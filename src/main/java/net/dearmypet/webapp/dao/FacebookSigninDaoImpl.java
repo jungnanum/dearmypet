@@ -29,4 +29,12 @@ public class FacebookSigninDaoImpl implements FacebookSigninDao {
 		return nRet;
 	}
 
+	@Override
+	public FacebookSigninVO selectLgFbVoById(String lgFbId) {
+		FacebookSigninVO facebookSigninVO = session.selectOne("facebookSigninMapper.selectLoginFBById", lgFbId);
+		return facebookSigninVO;
+	}
+	
+	
+
 }

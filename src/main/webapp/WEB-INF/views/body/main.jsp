@@ -11,5 +11,5 @@
 			<h2>바디부분22</h2>
 		</div>
 		<div class="text-center">내요요요요옹1</div>
-		<div><%=session.getAttribute("isLogined") %></div>
+		<div>--<%=session.getAttribute("isLogined") %>--</div>
 	</div>

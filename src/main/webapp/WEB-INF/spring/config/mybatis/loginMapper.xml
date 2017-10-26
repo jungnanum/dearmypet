@@ -30,4 +30,14 @@
 		<include refid="select-Login"/>
 		Order by lg_no asc
 	</select>
+	
+	
+	<insert id="insertLoginVO" parameterType="loginVO">
+		INSERT INTO login (
+			lg_id, lg_profile, lg_password, lg_email, lg_nickname,
+			lgfb_no, lgka_no, m_no, lg_login_type
+		)
+		VALUES( #{lg_id},#{lg_profile},#{lg_password},#{lg_email},#{lg_nickname},
+				#{lgfb_no},#{lgka_no},#{m_no},#{lg_login_type} )
+	</insert>
 </mapper>

@@ -1,5 +1,7 @@
 package net.dearmypet.webapp.service;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,10 @@ public class FacebookSigninServiceImpl implements FacebookSigninService {
 	
 	@Autowired
 	FacebookSigninDao facebookSigninDao;
-
+/*	
+	@Inject
+	FacebookSigninVO facebookSigninVO;
+*/
 	@Override
 	public String signinFBUser(FacebookSigninVO facebookSigninVO) {
 		
@@ -37,5 +42,14 @@ public class FacebookSigninServiceImpl implements FacebookSigninService {
 		
 		return strResult;
 	}
+
+	@Override
+	public int getLgFbNo(String lgFbId) {
+		FacebookSigninVO facebookSigninVO = facebookSigninDao.selectLgFbVoById(lgFbId);
+		int lgfb_no = facebookSigninVO.getLgfb_no();
+		return lgfb_no;
+	}
+	
+	
 
 }

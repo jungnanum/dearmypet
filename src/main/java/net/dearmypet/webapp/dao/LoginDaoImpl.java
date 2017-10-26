@@ -25,5 +25,12 @@ public class LoginDaoImpl implements LoginDao {
 	public List<LoginVO> selectAllLogin() {
 		return session.selectList("loginMapper.selectAllLogin");
 	}
+	
+	@Override
+	public int insertLoginVO(LoginVO loginVO) {
+		int nRet = session.insert("loginMapper.insertLoginVO", loginVO);
+		return nRet;
+	}
 
+	
 }
