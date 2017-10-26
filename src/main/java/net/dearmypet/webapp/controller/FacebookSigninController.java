@@ -62,7 +62,7 @@ public class FacebookSigninController {
 				}
 				
 				// 세션처리
-				httpSession.setAttribute("isLogined", true);
+				httpSession.setAttribute("isLogined", "true");
 				httpSession.setAttribute("lg_login_type", "lgfb");
 				httpSession.setAttribute("lgfb_name", facebookSigninVO.getLgfb_name()); // 사용자명
 				
