@@ -27,12 +27,12 @@
 
 <!-- id 기준으로 select -->
 	<select id="selectLoginFBById" parameterType="string" resultType="facebookVO">
-		<include refid="select-LoginFacebook"/>
+		<include refid="selectLoginFacebook"/>
 		WHERE lgfb_id = #{lgfb_id}
 	</select>
 
 	<select id="selectAllLoginFB" resultMap="facebookLogin-resultmap">
-		<include refid="select-LoginFacebook"/>
+		<include refid="selectLoginFacebook"/>
 		Order by lgfb_no asc
 	</select>
 
