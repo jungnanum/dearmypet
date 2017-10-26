@@ -10,6 +10,6 @@
 		<div class="text-center">
 			<h2>바디부분</h2>
 		</div>
-		<div class="text-center">내요요요요옹</div>
+		<div class="text-center">내요요요요옹1</div>
 		<div><%=session.getAttribute("test") %></div>
 	</div>
