@@ -9,6 +9,7 @@
 		<footer>
 			<address>주소</address>
 			<p>copyright</p>
+			<p id="BtnShareSocialNetwork">소셜공유 : <button class="btn-u btn-u-dark-blue btn-block" id="btnFbShare">Facebook</button> &nbsp; <button class="btn-u btn-u-blue btn-block" id="btnTwShare">Twitter</button> &nbsp; <button class="btn-u btn-u-red btn-block" id="btnGpShare">Google+</button></p>
 		</footer>
 	</div>
 <!-- footer end-->
@@ -27,27 +28,40 @@
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="${initParam.rootPath}/assets/js/app.js"></script>
 
-<%String strCurrentUrl = request.getScheme() + "://dearmypet.net" +request.getAttribute("url");%>
+<%
+String strUrl = (String)request.getAttribute("url");
+if(strUrl == null) strUrl = "";
+String strCurrentUrl = request.getScheme() + "://dev.dearmypet.net" + strUrl;
+%>
 	
 	
 	<script>
+	// 소셜 네트워크 공유
 	var orginUrl = "<%=strCurrentUrl%>";
 	var encodeUrl = encodeURIComponent(orginUrl);
 	
 	var snsShare = {
 			shareFb : function(){ //페이스북
-			
 				window.open("http://www.facebook.com/sharer/sharer.php?u="+encodeUrl, 'shareOn2', "width=600, height=500, scrollbars=no");
 			},
 			shareTw : function(){ // 트위터
 				//https://twitter.com/intent/tweet?text=TEXT&url=PAGE_URL
-				window.open("https://twitter.com/intent/tweet?text="+jQuery("#og_title").attr("content")+"&url=<%=strCurrentUrl%>", "_blank","toolbar=0,status=0,width=626,height=436");
+				window.open("https://twitter.com/intent/tweet?text=dearmypet.net&url=<%=strCurrentUrl%>", "_blank","toolbar=0,status=0,width=626,height=436");
 			},
 			shareGp : function(){ // 구글 플러스
 				window.open("https://plus.google.com/share?url=<%=strCurrentUrl%>", "sharer","toolbar=0,status=0,width=626,height=436");
 			}				
 		};
 	
+	jQuery("#BtnShareSocialNetwork").on("click", function(){
+		
+	}).on("click", "#btnFbShare", function(){
+		snsShare.shareFb();
+	}).on("click", "#btnTwShare", function(){
+		snsShare.shareTw();
+	}).on("click", "#btnGpShare", function(){
+		snsShare.shareGp();
+	});
 	</script>
 	
 <script>
@@ -74,4 +88,20 @@
 		statusChangeCallback(response);
 	});
 	}
+</script>
+<script>
+
+jQuery(function(){
+<% // 로그인 여부에 따라 버튼 show/hide 초기화
+	if( ( (String)session.getAttribute("isLogined") ) == "true" ) { %>
+	jQuery("#nav-login-button").hide();
+	jQuery("#nav-memberJoin-button").hide();
+	jQuery("#nav-logout-button").show();
+<% } else { %>
+	jQuery("#nav-logout-button").hide();
+	jQuery("#nav-memberJoin-button").show();
+	jQuery("#nav-login-button").show();
+<% } %>
+
+});
 </script>

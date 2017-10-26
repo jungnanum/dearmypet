@@ -32,10 +32,10 @@
 					</div>
 				</div>
 				<div class="col-md-3 nav-hidden">
-					<div>
+					<div id="gnbBtnMemberControll">
 						<button class="btn-u login_btn" id="nav-logout-button">로그아웃</button>
 						<button class="btn-u login_btn" data-toggle="modal" data-target="#login_modal" id="nav-login-button">로그인</button><!-- 모달 부르는 버튼 -->
-						<button class="btn-u login_btn" data-toggle="modal" data-target="#sign_up_modal">회원가입</button>
+						<button class="btn-u login_btn" data-toggle="modal" data-target="#sign_up_modal" id="nav-memberJoin-button">회원가입</button>
 					</div>
 				</div>
 			</div>

@@ -49,10 +49,11 @@ public class FacebookSigninController {
 			if(strResult == "Success" || strResult == "insertSuccess") { // 기존회원 or 신규회원 insert 성공
 				strRet = "true";
 				
+				int lgfb_no = 0;
 				// facebook에 신규회원이 insert된 다음, login테이블에 insert
 				if(strResult == "insertSuccess") {
 					// insert한 facebook 사용자 정보를 바탕으로 no값 조회
-					int lgfb_no = facebookSigninService.getLgFbNo(facebookSigninVO.getLgfb_id());
+					lgfb_no = facebookSigninService.getLgFbNo(facebookSigninVO.getLgfb_id());
 					// 기존facebookSigninVO + 부족한 no값 보태기
 					facebookSigninVO.setLgfb_no(lgfb_no);
 					int nAddMemberRet = loginService.insertLoginMemberFromFBUser(facebookSigninVO);
@@ -62,9 +63,12 @@ public class FacebookSigninController {
 				}
 				
 				// 세션처리
+				System.out.println("httpSession : " + httpSession);
 				httpSession.setAttribute("isLogined", "true");
-				httpSession.setAttribute("lg_login_type", "lgfb");
+				httpSession.setAttribute("lg_login_type", "facebook");
 				httpSession.setAttribute("lgfb_name", facebookSigninVO.getLgfb_name()); // 사용자명
+				httpSession.setAttribute("lgfb_id", facebookSigninVO.getLgfb_id()); // facebook user id
+				httpSession.setAttribute("lgfb_no", lgfb_no); // facebook table no
 				
 
 			} else {
@@ -102,4 +106,5 @@ public class FacebookSigninController {
 		
 		return jsonObject;
 	}
+	
 }

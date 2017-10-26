@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mysql.fabric.xmlrpc.base.Data;
 
 import net.dearmypet.webapp.service.LoginService;
+import net.dearmypet.webapp.vo.FacebookSigninVO;
 
 @Controller
 public class LoginController {
@@ -60,6 +64,27 @@ public class LoginController {
 		jsonObject.put("success", true);
 		jsonObject.put("total_count", 10);
 		jsonObject.put("result_list", jsonList);
+		
+		return jsonObject;
+	}
+	
+
+	@RequestMapping(value="/logout.jsn", method=RequestMethod.GET)
+	public @ResponseBody Map<String , Object> logout(HttpSession httpSession) {
+		httpSession.setAttribute("isLogined", "");
+		httpSession.setAttribute("lg_login_type", "");
+		httpSession.setAttribute("lgfb_name", ""); // 사용자명
+		httpSession.setAttribute("lgfb_id", ""); // facebook user id
+		httpSession.setAttribute("lgfb_no", ""); // facebook table no
+		
+		
+		Map<String, Object> jsonObject = new HashMap<String, Object>();
+//		Map<String, Object> jsonSubObject = null;
+		ArrayList<Map<String, Object>> jsonList = new ArrayList<Map<String, Object>>();
+		
+		
+		
+		jsonObject.put("result", "success");
 		
 		return jsonObject;
 	}

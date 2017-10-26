@@ -139,6 +139,10 @@ footer{
 	display: none;
 }
 
+#BtnShareSocialNetwork button{
+	width: 120px
+}
+
 @media (min-width: 991px){
 	.nav-hidden{
 		display:block!important;

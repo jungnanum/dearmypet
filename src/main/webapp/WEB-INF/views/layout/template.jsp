@@ -79,7 +79,7 @@
 <body>
 
 <!-- <div id="fb-root"></div> -->
-<div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div>
+<!-- <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();" ></div> -->
 <!-- <div class="fb-login-button" data-width="327.328" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="fbLogin();"></div> -->
 
 	<tiles:insertAttribute name ="header"/>
@@ -104,8 +104,8 @@
 	%>
 	<!--// js -->
 	
-	<button type="button" onclick="facebooklogin();">facebook 로그인</button>
-	<button type="button" onclick="facebookLogout()">facebook 로그아웃</button>
+	<!-- <button type="button" onclick="facebooklogin();">facebook 로그인</button> -->
+	<!-- <button type="button" onclick="facebookLogout()">facebook 로그아웃</button> -->
  
 <script>
 window.fbAsyncInit = function(){
@@ -130,7 +130,7 @@ js.src = "//connect.facebook.net/ko_KR/sdk.js";
 ref.parentNode.insertBefore(js, ref);
 }(document));
 
-function facebooklogin(){
+jQuery("#btnFacebookSignin").on("click", function(){
 	FB.login(function(response){
 		if (response.status === 'connected'){
 			getUserProfile();
@@ -141,17 +141,24 @@ function facebooklogin(){
 		}
 //	} , {scope: "user_about_me,email,user_birthday,public_profile"} );
 	}, {scope: "email,public_profile"} );
-
-}
+});
 
 function facebookLogout(){
-	//check if logout is 
+	//check if logout is
+	/*
 	FB.getLoginStatus(function(response) {
 		if (response && response.status === 'connected') {
 			FB.logout(function(response) {
 				document.location.reload();
 			});
 		}
+	});
+	*/
+	FB.getLoginStatus(function(response){
+  		if(response.status=='connected'){
+  			//로그인 되어있으면 로그아웃시킴
+			FB.logout();
+  		}
 	});
 //	window.location.href = '/main.dmp';
 }
@@ -210,7 +217,14 @@ function getUserProfile(){
 //						updated_time : user.updated_time
 					},
 					success: function(res){
-						console.log(res);
+//						console.log(res);
+						if(res.result == "true"){ // 회원가입/로그인 성공 시 버튼 처리
+							jQuery("#nav-login-button").hide();
+							jQuery("#nav-memberJoin-button").hide();
+							jQuery("#nav-logout-button").show();
+							jQuery("#login_modal").hide(); // 로그인 모달창 닫기
+						}
+						
 					},
 					error: function(res){
 						console.log(res);
