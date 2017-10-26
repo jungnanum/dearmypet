@@ -59,9 +59,12 @@ public class FacebookSigninController {
 				strRet = "false";
 			}
 			
-//			jsonSubObject = new HashMap<String, Object>();
-//			jsonSubObject.put("result", strResult);
+			
 			/*
+			// client 측에서 넘어온 페이스북 데이터를 확인할 때 아래의 소스를 이용해주세요.
+//			jsonSubObject = new HashMap<String, Object>();
+
+//			jsonSubObject.put("result", strResult);
 			jsonSubObject.put("lgfb_id", facebookSigninVO.getLgfb_id());
 			jsonSubObject.put("lgfb_picture", facebookSigninVO.getLgfb_picture());
 			jsonSubObject.put("lgfb_name", facebookSigninVO.getLgfb_name());
