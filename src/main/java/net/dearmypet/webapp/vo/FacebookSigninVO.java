@@ -3,6 +3,10 @@ package net.dearmypet.webapp.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+import org.apache.ibatis.type.Alias;
+
+// Mybatis 매퍼에서 사용할 별칭지정
+@Alias("facebookVO")
 public class FacebookSigninVO implements Serializable{
 	
 	private static final long serialVersionUID = 1L; // 객체 직렬화/역직렬화 대비
