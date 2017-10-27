@@ -25,6 +25,11 @@
 		<include refid="select-Login"/>
 		Where lg_no = #{lg_no}
 	</select>
+	<!-- login -->
+	<select id="selectLoginByEmailAndPassword" parameterType="map" resultType="loginVO">
+		<include refid="select-Login"/>
+		Where lg_email=#{lg_email} And lg_password = #{lg_password}
+	</select>
 	
 	<select id="selectAllLogin" parameterType="string" resultMap="login-resultmap">
 		<include refid="select-Login"/>

@@ -62,6 +62,7 @@ public class LoginVO implements Serializable{
 
 	public void setLg_password(String lg_password) {
 		this.lg_password = lg_password;
+		System.out.println("setLg_password setter : "+this.lg_password);
 	}
 
 	public String getLg_email() {
@@ -70,6 +71,7 @@ public class LoginVO implements Serializable{
 
 	public void setLg_email(String lg_email) {
 		this.lg_email = lg_email;
+		System.out.println("getLg_email setter : "+this.lg_email);
 	}
 
 	public String getLg_nickname() {

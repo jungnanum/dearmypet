@@ -231,7 +231,7 @@
 										<div class="col col-8">
 											<label class="input">
 												<i class="icon-append fa fa-user"></i>
-												<input type="email" name="email">
+												<input type="email" name="lg_email">
 											</label>
 										</div>
 									</div>
@@ -243,31 +243,31 @@
 										<div class="col col-8">
 											<label class="input">
 												<i class="icon-append fa fa-lock"></i>
-												<input type="password" name="password">
+												<input type="password" name="lg_password">
 											</label>
 											<div class="note"><a href="#sky-form2" class="modal-opener" data-toggle="modal" data-target="#sky-form2">Forgot password?</a></div>
 										</div>
 									</div>
 								</section>
 
-								<section>
+								<!-- <section>
 									<div class="row">
 										<div class="col col-4"></div>
 										<div class="col col-8">
 											<label class="checkbox"><input type="checkbox" name="remember" checked><i></i>Keep me logged in</label>
 										</div>
 									</div>
-								</section>
+								</section> -->
 							</fieldset>
 							<footer>
 								<div class="row">
 									<div class="col-xs-4">
-										<button type="submit" class="btn-u btn-block" id="modal-login-button">로그인</button>
+										<button type="button" class="btn-u btn-block" id="modal-login-button">로그인</button>
 										<a href="#" class="btn-u btn-u-default btn-block">회원가입</a>
 									</div>
 									<div class="col-xs-8">
 										<button class="btn-u btn-u-dark-blue btn-block" id="btnFacebookSignin">페이스북</button>
-										<button class="btn-u btn-u-yellow btn-block">카카오톡</button>
+										<!-- <button class="btn-u btn-u-yellow btn-block">카카오톡</button> -->
 									</div>
 								</div>
 							</footer>

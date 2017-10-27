@@ -45,4 +45,10 @@ public class LoginServiceImpl implements LoginService {
 		return nRet;
 	}
 
+	@Override
+	public LoginVO selectLoginByEmailAndPassword(String strEmail, String strPassword) {
+		LoginVO loginVO = loginDao.selectLoginByEmailAndPassword(strEmail, strPassword);
+		return loginVO;
+	}
+
 }
